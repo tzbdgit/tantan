@@ -1,0 +1,1 @@
+VCODE_KEY="vcode_%s" #验证码的key
