@@ -19,12 +19,13 @@ class User(models.Model):
     phonenum=models.CharField(max_length=16,unique=True,db_index=True,
                               verbose_name="手机号")
     nickname=models.CharField(max_length=32,verbose_name="昵称")
-    sex=models.CharField(max_length=8,choices=SEX,verbose_name="性别")
-    birthday=models.DateField(default=datetime.date(1996,1,2),verbose_name="出生日期"),
+    sex=models.CharField(max_length=8,choices=SEX,default="male",verbose_name="性别")
+    birthday=models.DateField(default="1990-1-1",verbose_name="出生日期")
     location=models.CharField(max_length=16,choices=LOCATION,verbose_name="居住地")
     avatar=models.CharField(max_length=256,verbose_name="个人形象")
     def to_dict(self):
-        result={
+        return {
+            "uid":self.pk,
             "phonenum":self.phonenum,
             "nickname":self.nickname,
             "sex":self.sex,
@@ -32,5 +33,4 @@ class User(models.Model):
             "location":self.location,
             "avatar":self.avatar
         }
-        return result
 

@@ -13,10 +13,11 @@ def send_vcode(phonenum):
     vcode=generate_vcode()
     params["mobile"]=phonenum
     params["param"]=vcode
+    print(vcode)
     response=requests.post(url=YZX_URL,json=params)
     if response.status_code==200:
         if response.json()["msg"]=="账号未认证":
-            cache.set(keys.VCODE_KEY % phonenum,vcode,180)
+            cache.set(keys.VCODE_KEY % phonenum,vcode,10)
             return True
         return False
     return False
